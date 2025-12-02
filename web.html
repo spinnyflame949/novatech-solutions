@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Tech Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, #000, #0a0a0a, #000);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: rgba(0,0,0,0.8);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00ffcc, transparent);
+            animation: glowLine 2s ease-in-out infinite;
+        }
+        
+        @keyframes glowLine {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 20px;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        nav a:hover {
+            color: #00ffcc;
+            transform: translateY(-2px);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ffcc;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Page sections */
+        section {
+            min-height: 100vh;
+            padding: 100px 20px 80px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        
+        .section-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
+        }
+        
+        .section-image:hover {
+            transform: scale(1.02) rotate(2deg);
+        }
+        
+        .section-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+        
+        .section-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .section-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .section-text h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            animation: titlePulse 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+        
+        .section-text h2::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #00ffcc, transparent);
+            animation: underlineExpand 2s ease-in-out infinite;
+        }
+        
+        @keyframes underlineExpand {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; }
+        }
+        
+        @keyframes titlePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .section-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            animation: fadeInUp 1s ease-out;
+            cursor: pointer;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .price-box {
+            background: linear-gradient(135deg, #111, #222);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .price-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        
+        .price-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #00ffcc;
+        }
+        
+        .price-box .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(0,255,204,0.5);
+            animation: priceGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes priceGlow {
+            from { text-shadow: 0 0 5px rgba(0,255,204,0.5); }
+            to { text-shadow: 0 0 20px rgba(0,255,204,0.8); }
+        }
+        
+        .price-box .note {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #00ffcc, #00cc99);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid #00ffcc;
+            box-shadow: 0 5px 15px rgba(0,255,204,0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(135deg, #00cc99, #009977);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,255,204,0.5);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00ffcc, #00cc99);
+            transition: all 0.5s ease;
+        }
+        
+        .btn:hover::before {
+            left: 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, #111, #222);
+            padding: 30px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #00ffcc, transparent);
+            transition: width 0.5s ease;
+        }
+        
+        .service-card:hover::before {
+            width: 100%;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #00ffcc;
+        }
+        
+        .service-card p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        footer {
+            background-color: rgba(0,0,0,0.8);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+            position: relative;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            color: #00ffcc;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #00ffcc;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://placehold.co/1920x1080/111/fff?text=Server+Rack') no-repeat center center;
+            background-size: cover;
+            padding: 20px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 20%, rgba(0,255,204,0.1) 0%, rgba(0,0,0,0) 20%),
+                        radial-gradient(circle at 80% 80%, rgba(0,255,204,0.1) 0%, rgba(0,0,0,0) 20%);
+            pointer-events: none;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0,255,204,0.5);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #00ffcc, transparent);
+            animation: underlineExpand 2s ease-in-out infinite;
+        }
+        
+        @keyframes titleGlow {
+            from {
+                text-shadow: 0 0 5px rgba(0,255,204,0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0,255,204,0.8);
+            }
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out;
+            cursor: pointer;
+        }
+        
+        /* About Section */
+        .about-section {
+            background: linear-gradient(135deg, #0a0a0a, #0f0f0f);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: titlePulse 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            animation: fadeInUp 1s ease-out;
+            cursor: pointer;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            background: linear-gradient(135deg, #111, #222);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid #00ffcc;
+        }
+        
+        .team-member h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #00ffcc;
+        }
+        
+        .team-member p {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #0f0f0f, #0a0a0a);
+        }
+        
+        .contact-content {
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: titlePulse 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+        
+        .contact-info p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            animation: fadeInUp 1s ease-out;
+            cursor: pointer;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #00ffcc;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            background: #111;
+            color: #fff;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ffcc;
+            box-shadow: 0 0 10px rgba(0,255,204,0.3);
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00ffcc, #00cc99);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .form-submit:hover {
+            background: linear-gradient(135deg, #00cc99, #009977);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,255,204,0.5);
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+            background: linear-gradient(135deg, #0a0a0a, #0f0f0f);
+        }
+        
+        .testimonials-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            animation: titlePulse 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+        
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .testimonial-item {
+            background: linear-gradient(135deg, #111, #222);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .testimonial-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        
+        .testimonial-content {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-content::before {
+            content: '"';
+            font-size: 3rem;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            color: rgba(0,255,204,0.3);
+            opacity: 0.5;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid #00ffcc;
+        }
+        
+        .testimonial-author-info h4 {
+            font-size: 1.1rem;
+            color: #00ffcc;
+        }
+        
+        .testimonial-author-info p {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Navigation active state */
+        nav a.active {
+            color: #00ffcc;
+        }
+        
+        nav a.active::after {
+            width: 100%;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-content {
+                flex-direction: column;
+            }
+            
+            .section-text, .section-image {
+                width: 100%;
+            }
+            
+            .section-text h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        .circle {
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ffcc, #00cc99);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            50% { transform: translate(10px, -10px) rotate(180deg); }
+            100% { transform: translate(0px, 0px) rotate(360deg); }
+        }
+        
+        .circle:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+        
+        .circle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            bottom: -75px;
+            left: -75px;
+            animation-delay: 2s;
+        }
+        
+        .circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            right: -50px;
+            animation-delay: 4s;
+        }
+        
+        /* Button hover effects */
+        .btn:hover {
+            box-shadow: 0 10px 25px rgba(0,255,204,0.5);
+            transform: translateY(-2px);
+        }
+        
+        /* Add some particle effects */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(0,255,204,0.5);
+            border-radius: 50%;
+            animation: floatParticle 5s linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translate(0, 0); opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { transform: translate(10px, 10px); opacity: 0.5; }
+        }
+        
+        .particle:nth-child(1) {
+            width: 2px;
+            height: 2px;
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+        
+        .particle:nth-child(2) {
+            width: 1px;
+            height: 1px;
+            top: 30%;
+            left: 40%;
+            animation-delay: 1s;
+        }
+        
+        .particle:nth-child(3) {
+            width: 3px;
+            height: 3px;
+            top: 50%;
+            left: 60%;
+            animation-delay: 2s;
+        }
+        
+        .particle:nth-child(4) {
+            width: 2px;
+            height: 2px;
+            top: 70%;
+            left: 80%;
+            animation-delay: 3s;
+        }
+        
+        .particle:nth-child(5) {
+            width: 1px;
+            height: 1px;
+            top: 90%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+        
+        /* Page transitions */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .page-transition.fade-out {
+            opacity: 0;
+        }
+        
+        /* Text hover effects */
+        .hover-glow {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .hover-glow:hover {
+            text-shadow: 0 0 10px rgba(0,255,204,0.8);
+            transform: scale(1.02);
+            color: #00ffcc;
+        }
+        
+        .hover-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,255,204,0.1), rgba(0,255,204,0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+            border-radius: 4px;
+        }
+        
+        .hover-glow:hover::before {
+            opacity: 1;
+        }
+        
+        /* Dynamic title animation */
+        .dynamic-title {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .dynamic-title span {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .dynamic-title:hover span {
+            transform: translateY(-5px);
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0,255,204,0.8);
+        }
+        
+        .dynamic-title span:nth-child(odd) {
+            transition-delay: 0.05s;
+        }
+        
+        .dynamic-title span:nth-child(even) {
+            transition-delay: 0.1s;
+        }
+        
+        /* Image hover effects */
+        .image-hover {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .image-hover:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,255,204,0.3);
+        }
+        
+        .image-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,255,204,0.1), rgba(0,255,204,0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+            border-radius: 12px;
+        }
+        
+        .image-hover:hover::before {
+            opacity: 1;
+        }
+        
+        /* Enhanced hover effect for all text elements */
+        .text-hover {
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .text-hover:hover {
+            text-shadow: 0 0 15px rgba(0,255,204,0.8);
+            color: #00ffcc;
+            transform: translateY(-2px);
+        }
+        
+        .text-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,255,204,0.1), rgba(0,255,204,0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+            border-radius: 4px;
+        }
+        
+        .text-hover:hover::before {
+            opacity: 1;
+        }
+        
+        /* Special animation for hero title */
+        .hero-title {
+            animation: dynamicTitle 3s ease-in-out infinite;
+        }
+        
+        @keyframes dynamicTitle {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); text-shadow: 0 0 15px rgba(0,255,204,0.8); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Add glowing effect to all headings */
+        .glow-effect {
+            text-shadow: 0 0 5px rgba(0,255,204,0.5);
+            transition: text-shadow 0.3s ease;
+        }
+        
+        .glow-effect:hover {
+            text-shadow: 0 0 20px rgba(0,255,204,0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Transition -->
+    <div class="page-transition"></div>
+    
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    
+    <!-- Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-element">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo hover-glow">Nova Tech Solutions</div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active hover-glow">Home</a></li>
+                    <li><a href="#cloud-services" class="hover-glow">Cloud Services</a></li>
+                    <li><a href="#data-analytics" class="hover-glow">Data Analytics</a></li>
+                    <li><a href="#cyber-security" class="hover-glow">Cyber Security</a></li>
+                    <li><a href="#about" class="hover-glow">About</a></li>
+                    <li><a href="#contact" class="hover-glow">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <h1 class="hero-title dynamic-title glow-effect">
+                <span>N</span><span>O</span><span>V</span><span>A</span>
+                <span>T</span><span>E</span><span>C</span><span>H</span>
+                <span>S</span><span>O</span><span>L</span><span>U</span><span>T</span><span>I</span><span>O</span><span>N</span><span>S</span>
+            </h1>
+            <p class="text-hover">Step into a digital infrastructure built for innovation.</p>
+            <a href="#cloud-services" class="btn" style="margin-top: 30px;">Explore Our Services</a>
+        </section>
+
+        <!-- Cloud Services Section -->
+        <section id="cloud-services" class="section">
+            <div class="section-content">
+                <div class="section-image image-hover">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cloud Server">
+                </div>
+                <div class="section-text">
+                    <h2 class="dynamic-title glow-effect text-hover">
+                        <span>C</span><span>L</span><span>O</span><span>U</span><span>D</span>
+                        <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>E</span><span>S</span>
+                    </h2>
+                    <p class="text-hover">Step into a digital infrastructure built for innovation.</p>
+                    <p class="text-hover">Whether you're deploying applications, scaling your business, or managing data — you'll have the infrastructure, tools, and expert support to bring your digital vision to life. No downtime. No complexity. Just results.</p>
+                    
+                    <div class="price-box">
+                        <h3 class="text-hover">Cloud Hosting (Basic Plan)</h3>
+                        <div class="price">£70</div>
+                        <div class="note">Limited enterprise slots available</div>
+                        <a href="#" class="btn">BOOK CONSULTATION</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Analytics Section -->
+        <section id="data-analytics" class="section">
+            <div class="section-content">
+                <div class="section-text">
+                    <h2 class="dynamic-title glow-effect text-hover">
+                        <span>D</span><span>A</span><span>T</span><span>A</span>
+                        <span>A</span><span>N</span><span>A</span><span>L</span><span>Y</span><span>T</span><span>I</span><span>C</span><span>S</span>
+                    </h2>
+                    <p class="text-hover">Step into a digital infrastructure built for innovation.</p>
+                    <p class="text-hover">Whether you're analyzing customer behavior, optimizing operations, or forecasting trends — you'll have the tools, dashboards, and analytical support to turn your data into actionable insights. No guesswork. No limitations. Just intelligence.</p>
+                    
+                    <div class="price-box">
+                        <h3 class="text-hover">Data Analytics (Standard Package)</h3>
+                        <div class="price">£90</div>
+                        <div class="note">Limited enterprise slots available</div>
+                        <a href="#" class="btn">BOOK CONSULTATION</a>
+                    </div>
+                </div>
+                <div class="section-image image-hover">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Data Dashboard">
+                </div>
+            </div>
+        </section>
+
+        <!-- Cyber Security Section -->
+        <section id="cyber-security" class="section">
+            <div class="section-content">
+                <div class="section-image image-hover">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cyber Shield">
+                </div>
+                <div class="section-text">
+                    <h2 class="dynamic-title glow-effect text-hover">
+                        <span>C</span><span>Y</span><span>B</span><span>E</span><span>R</span>
+                        <span>S</span><span>E</span><span>C</span><span>U</span><span>R</span><span>I</span><span>T</span><span>Y</span>
+                    </h2>
+                    <p class="text-hover">Step into a digital infrastructure built for innovation.</p>
+                    <p class="text-hover">Whether you're protecting sensitive data, securing networks, or preventing breaches — you'll have the protocols, monitoring, and security expertise to safeguard your digital assets. No vulnerabilities. No compromises. Just protection.</p>
+                    
+                    <div class="price-box">
+                        <h3 class="text-hover">Cyber Security (Essential Plan)</h3>
+                        <div class="price">£50</div>
+                        <div class="note">Limited enterprise slots available</div>
+                        <a href="#" class="btn">BOOK CONSULTATION</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content fade-in">
+                    <h2 class="dynamic-title glow-effect text-hover">
+                        <span>A</span><span>B</span><span>O</span><span>U</span><span>T</span>
+                        <span>U</span><span>S</span>
+                    </h2>
+                    <p class="text-hover">We are a cutting-edge technology solutions provider dedicated to helping businesses navigate the digital landscape with confidence and innovation. Our team of experts combines technical excellence with creative problem-solving to deliver solutions that drive real results.</p>
+                    <p class="text-hover">Founded in 2020, Nova Tech Solutions has grown into a trusted partner for companies across industries, helping them harness the power of technology to achieve their goals.</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-member fade-in">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Alex">
+                        <h3 class="text-hover">Alex Morgan</h3>
+                        <p>CEO & Founder</p>
+                    </div>
+                    <div class="team-member fade-in">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Jordan">
+                        <h3 class="text-hover">Jordan Lee</h3>
+                        <p>CTO</p>
+                    </div>
+                    <div class="team-member fade-in">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Sam">
+                        <h3 class="text-hover">Sam Taylor</h3>
+                        <p>Head of Security</p>
+                    </div>
+                    <div class="team-member fade-in">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Riley">
+                        <h3 class="text-hover">Riley Chen</h3>
+                        <p>Data Science Lead</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials-section">
+            <div class="container">
+                <div class="testimonials-content fade-in">
+                    <h2 class="dynamic-title glow-effect text-hover">
+                        <span>W</span><span>H</span><span>A</span><span>T</span>
+                        <span>O</span><span>U</span><span>R</span>
+                        <span>C</span><span>L</span><span>I</span><span>E</span><span>N</span><span>T</span><span>S</span>
+                        <span>S</span><span>A</span><span>Y</span>
+                    </h2>
+                    
+                    <div class="testimonial-slider">
+                        <div class="testimonial-item">
+                            <div class="testimonial-content text-hover">
+                                "Nova Tech Solutions transformed our business infrastructure overnight. Their cloud services are reliable, scalable, and incredibly easy to use. I can't recommend them enough!"
+                            </div>
+                            <div class="testimonial-author">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=50&q=80" alt="Client">
+                                <div class="testimonial-author-info">
+                                    <h4 class="text-hover">Sarah Johnson</h4>
+                                    <p>CEO, TechStart Inc.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-item">
+                            <div class="testimonial-content text-hover">
+                                "The data analytics team at Nova Tech helped us uncover insights we never knew existed. Their approach is both sophisticated and practical, delivering real value to our decision-making process."
+                            </div>
+                            <div class="testimonial-author">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=50&q=80" alt="Client">
+                                <div class="testimonial-author-info">
+                                    <h4 class="text-hover">Michael Rodriguez</h4>
+                                    <p>Director of Operations, GlobalCorp</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-item">
+                            <div class="testimonial-content text-hover">
+                                "Security was our top concern, and Nova Tech delivered beyond expectations. Their cyber security solutions give us peace of mind while allowing us to innovate without fear."
+                            </div>
+                            <div class="testimonial-author">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=50&q=80" alt="Client">
+                                <div class="testimonial-author-info">
+                                    <h4 class="text-hover">Emma Thompson</h4>
+                                    <p>CTO, SecureBank</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-info fade-in">
+                        <h2 class="dynamic-title glow-effect text-hover">
+                            <span>G</span><span>E</span><span>T</span>
+                            <span>I</span><span>N</span>
+                            <span>T</span><span>O</span><span>U</span><span>C</span><span>H</span>
+                        </h2>
+                        <p class="text-hover">Have questions about our services or want to schedule a consultation? Reach out to us using the form below or contact us directly.</p>
+                        <p class="text-hover"><strong>Phone:</strong> +44 20 1234 5678</p>
+                        <p class="text-hover"><strong>Email:</strong> info@novatech.com</p>
+                        <p class="text-hover"><strong>Address:</strong> 123 Innovation Drive, London, UK</p>
+                    </div>
+                    
+                    <div class="contact-form fade-in">
+                        <h3 class="text-hover">Send Us a Message</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="name" class="text-hover">Name</label>
+                                <input type="text" id="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="text-hover">Email</label>
+                                <input type="email" id="email" placeholder="your.email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="text-hover">Subject</label>
+                                <input type="text" id="subject" placeholder="Subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="text-hover">Message</label>
+                                <textarea id="message" rows="5" placeholder="Your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="form-submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Nova Tech Solutions. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#" class="text-hover">Privacy Policy</a>
+                <a href="#" class="text-hover">Terms of Service</a>
+                <a href="#" class="text-hover">Contact Us</a>
+                <a href="#" class="text-hover">Careers</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                // Show page transition
+                const transition = document.querySelector('.page-transition');
+                transition.classList.remove('fade-out');
+                
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Hide transition after scroll
+                    setTimeout(() => {
+                        transition.classList.add('fade-out');
+                    }, 500);
+                }, 300);
+                
+                // Update active link
+                document.querySelectorAll('nav a').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Add scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Add floating effect to sections
+        document.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    section.style.transform = `translateY(${window.scrollY * 0.05}px)`;
+                }
+            });
+        });
+        
+        // Add hover effects to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+            });
+        });
+        
+        // Initialize page transition
+        window.addEventListener('load', () => {
+            const transition = document.querySelector('.page-transition');
+            setTimeout(() => {
+                transition.classList.add('fade-out');
+            }, 500);
+        });
+        
+        // Add dynamic title animation
+        document.querySelectorAll('.dynamic-title').forEach(title => {
+            const text = title.textContent;
+            title.innerHTML = '';
+            
+            for (let i = 0; i < text.length; i++) {
+                const span = document.createElement('span');
+                span.textContent = text[i];
+                title.appendChild(span);
+            }
+        });
+        
+        // Add hover effects to all text elements
+        document.querySelectorAll('.text-hover, .hover-glow, .glow-effect').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.transition = 'all 0.3s ease';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transition = 'all 0.3s ease';
+            });
+        });
+        
+        // Add hover effect to images
+        document.querySelectorAll('.image-hover').forEach(image => {
+            image.addEventListener('mouseenter', () => {
+                image.style.transition = 'all 0.3s ease';
+            });
+            
+            image.addEventListener('mouseleave', () => {
+                image.style.transition = 'all 0.3s ease';
+            });
+        });
+        
+        // Add click effect to logo
+        document.querySelector('.logo').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Add interactive elements
+        document.querySelectorAll('h1, h2, h3, p, .btn, .service-card, .team-member, .testimonial-item').forEach(element => {
+            element.addEventListener('click', () => {
+                if (element.classList.contains('btn')) return;
+                
+                element.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
+
